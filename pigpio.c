@@ -7665,8 +7665,14 @@ static void initClock(int mainClock)
       per = "PCM";
    }
 
-   clkSrc  = CLK_CTL_SRC_PLLD;
-   clkDivI = 50 * micros; /* 10      MHz - 1      MHz */
+   if (mainClock)
+   {
+      clkSrc  = CLK_CTL_SRC_PLLD;
+      clkDivI = 50 * micros; /* 10      MHz - 1      MHz */
+   } else {
+	  clkSrc  = CLK_CTL_SRC_OSC;
+	  clkDivI = 4;
+   }
    clkBits = BITS;        /* 10/BITS MHz - 1/BITS MHz */
    clkDivF = 0;
    clkMash = 0;
